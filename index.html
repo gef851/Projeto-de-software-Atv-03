@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo Conecta Bairro - MVP</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .phone-container {
+            width: 375px;
+            height: 720px;
+            background-color: #ffffff;
+            border-radius: 36px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+            border: 8px solid #222;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .screen-header {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px 15px 15px 15px;
+            text-align: center;
+            position: relative;
+        }
+        .screen-header h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .screen-header p {
+            margin: 5px 0 0 0;
+            font-size: 11px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+        }
+        .welcome-card {
+            background: linear-gradient(135deg, #e6f0fa, #cce0f5);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 5px solid #0056b3;
+        }
+        .welcome-card h2 {
+            margin: 0 0 5px 0;
+            font-size: 15px;
+            color: #003366;
+        }
+        .welcome-card p {
+            margin: 0;
+            font-size: 12px;
+            color: #444;
+            line-height: 1.4;
+        }
+        .menu-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #555;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .btn-menu {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 14px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .btn-menu:hover {
+            border-color: #0056b3;
+            background-color: #f8faff;
+            transform: translateY(-1px);
+        }
+        .btn-menu .icon {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        .btn-menu .text-container {
+            flex: 1;
+        }
+        .btn-menu .title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #222;
+        }
+        .btn-menu .desc {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+        }
+        .btn-menu .arrow {
+            color: #ccc;
+            font-weight: bold;
+        }
+        .footer-info {
+            text-align: center;
+            padding: 12px;
+            font-size: 11px;
+            color: #777;
+            background-color: #fafafa;
+            border-top: 1px solid #eee;
+        }
+        .footer-info strong {
+            color: #0056b3;
+        }
+        .download-btn {
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .download-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-container">
+        <!-- HEADER DO APP -->
+        <div class="screen-header">
+            <h1>📍 Conecta Bairro</h1>
+            <p>Solução Comunitária e Planejamento Urbano</p>
+        </div>
+
+        <!-- CONTEÚDO PRINCIPAL (MENU INICIAL MVP) -->
+        <div class="content">
+            <div class="welcome-card">
+                <h2>Olá, Cidadão!</h2>
+                <p>Ajude a melhorar nossa comunidade. Registre as necessidades de zeladoria e infraestrutura diretamente para análise do município.</p>
+            </div>
+
+            <div class="menu-title">Serviços Disponíveis</div>
+
+            <!-- AÇÃO CENTRAL: REGISTRAR NECESSIDADE -->
+            <div class="btn-menu" onclick="alert('Funcionalidade Central MVP: Abre o Formulário Digital de Registro (Tipo, Local, Descrição e Foto)')">
+                <div class="icon">📝</div>
+                <div class="content-text" style="flex:1;">
+                    <div class="title">Registrar Necessidade</div>
+                    <div class="desc">Informe problemas de asfalto, iluminação, limpeza, etc.</div>
+                </div>
+                <div class="arrow">➔</div>
+            </div>
+
+            <!-- AÇÃO 2: ACOMPANHAR DEMANDAS -->
+            <div class="btn-menu" onclick="alert('Abre a Planilha de Acompanhamento Pública com os Status e Prazos do Planejamento')">
+                <div class="icon">📊</div>
+                <div class="content-text" style="flex:1;">
+                    <div class="title">Acompanhar Demandas</div>
+                    <div class="desc">Consulte o andamento, prazos e ações do seu bairro.</div>
+                </div>
+                <div class="arrow">➔</div>
+            </div>
+
+            <!-- AÇÃO 3: CANAL DE COMUNICAÇÃO -->
+            <div class="btn-menu" onclick="alert('Redireciona para o Canal de Comunicação Direta / Avisos Comunitários')">
+                <div class="icon">💬</div>
+                <div class="content-text" style="flex:1;">
+                    <div class="title">Canal de Comunicação</div>
+                    <div class="desc">Alertas do bairro e avisos do Planejamento Municipal.</div>
+                </div>
+                <div class="arrow">➔</div>
+            </div>
+        </div>
+
+        <!-- RODAPÉ INSTITUCIONAL (PARCEIRO DO PROJETO) -->
+        <div class="footer-info">
+            Gestão e Fiscalização:<br>
+            <strong>Departamento de Planejamento do Município</strong>
+        </div>
+    </div>
+
+    <p style="margin-top:25px; color:#666; font-size:12px;">Este arquivo HTML contém o protótipo visual interativo completo em formato mobile.</p>
+
+</body>
+</html>
