@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conecta Bairro - Protótipo Integrado MVP</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-hover: #172554;
+            --secondary: #0284c7;
+            --success: #16a34a;
+            --bg-app: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container Smartphone */
+        .phone-mockup {
+            width: 100%;
+            max-width: 412px;
+            height: 844px;
+            background-color: var(--bg-app);
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 12px solid #334155;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            height: 35px;
+            background-color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            color: white;
+            font-size: 13px;
+        }
+
+        /* Header */
+        .app-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .app-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* Conteúdo do App */
+        .app-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Controle de Telas (Esconder por padrão) */
+        .screen {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        .screen-title {
+            font-size: 18px;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .screen-subtitle {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* ================= TELA 1: MENU ================= */
+        .welcome-section {
+            margin-bottom: 24px;
+        }
+
+        .menu-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .menu-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: border-color 0.2s;
+        }
+
+        .menu-card:focus, .menu-card:hover {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .menu-card.featured {
+            border-color: var(--primary);
+            background-color: #f0fdfa;
+        }
+
+        .card-icon {
+            font-size: 24px;
+            background: #e2e8f0;
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 48px;
+            text-align: center;
+        }
+
+        .menu-card.featured .card-icon {
+            background: #dbeafe;
+        }
+
+        .card-info {
+            flex: 1;
+        }
+
+        .card-info h3 {
+            font-size: 15px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .card-info p {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ================= TELA 2: FORMULÁRIO ================= */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            min-height: 48px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            color: var(--text-main);
+            background-color: var(--bg-card);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .photo-upload {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            background-color: var(--bg-card);
+            cursor: pointer;
+        }
+
+        /* ================= TELA 3: LISTAGEM (PLANILHA) ================= */
+        .demand-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .demand-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--primary);
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .demand-item.resolved {
+            border-left-color: var(--success);
+        }
+
+        .demand-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: white;
+        }
+
+        .badge-analise { background-color: #f59e0b; }
+        .badge-resolvido { background-color: var(--success); }
+
+        .demand-text {
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .demand-loc {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ================= COMPONENTES GERAIS ================= */
+        /* Alerta de Sucesso Customizado (Fica oculto) */
+        .custom-alert {
+            display: none;
+            background-color: #dcfce7;
+            border: 2px solid var(--success);
+            color: #15803d;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .btn-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            min-height: 48px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-secondary { background-color: transparent; color: var(--text-muted); border: 2px solid var(--border); }
+
+        .app-footer {
+            background-color: #f1f5f9;
+            border-top: 1px solid var(--border);
+            padding: 12px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-mockup">
+        <div class="status-bar">
+            <span>10:30</span>
+            <span>📶 🔋 100%</span>
+        </div>
+
+        <header class="app-header">
+            <h1>📍 Conecta Bairro</h1>
+        </header>
+
+        <main class="app-content">
+            
+            <!-- ALERTA DE SUCESSO GLOBAL -->
+            <div id="sucesso-alert" class="custom-alert">
+                🎉 Demanda registrada com sucesso na lista de fiscalização!
+            </div>
+
+            <!-- ================= TELA 1: MENU PRINCIPAL ================= -->
+            <div id="tela-menu" class="screen active">
+                <div class="welcome-section">
+                    <h2 class="screen-title">Olá, Cidadão!</h2>
+                    <p class="screen-subtitle">Zeladoria comunitária em contato direto com a Prefeitura.</p>
+                </div>
+
+                <div class="menu-grid">
+                    <button class="menu-card featured" onclick="navegarPara('tela-formulario')" aria-label="Registrar Necessidade">
+                        <div class="card-icon">📝</div>
+                        <div class="card-info">
+                            <h3>Registrar Necessidade</h3>
+                            <p>Abra um chamado de reparo urbano local.</p>
+                        </div>
+                    </button>
+
+                    <button class="menu-card" onclick="navegarPara('tela-listagem')" aria-label="Acompanhar Demandas">
+                        <div class="card-icon">📊</div>
+                        <div class="card-info">
+                            <h3>Acompanhar Demandas</h3>
+                            <p>Monitore os prazos e ações do Departamento.</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= TELA 2: FORMULÁRIO DE REGISTRO ================= -->
+            <div id="tela-formulario" class="screen">
+                <h2 class="screen-title">Nova Demanda</h2>
+                <p class="screen-subtitle">Insira dados claros para agilizar a triagem técnica.</p>
