@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Conecta Bairro - Registro de Demanda</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Registro de Demanda do Munícipe</h1>
+
+    <form id="formDemanda">
+        <label>Nome do Munícipe</label>
+        <input type="text" id="nome" required>
+
+        <label>Tipo de Problema</label>
+        <select id="tipo">
+            <option>Buraco na Via</option>
+            <option>Iluminação Pública</option>
+            <option>Limpeza Urbana</option>
+            <option>Poda de Árvores</option>
+            <option>Outros</option>
+        </select>
+
+        <label>Descrição</label>
+        <textarea id="descricao" required></textarea>
+
+        <button type="button" onclick="gerarDemanda()">
+            Registrar Demanda
+        </button>
+    </form>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+function gerarDemanda() {
+    const ano = new Date().getFullYear();
+    const numero = Math.floor(Math.random() * 100000);
+
+    const protocolo = `CB-${ano}-${numero}`;
+
+    document.getElementById("resultado").innerHTML =
+        `<h2>Demanda Registrada</h2>
+         <p><strong>Protocolo:</strong> ${protocolo}</p>
+         <p>Status: Recebido</p>`;
+}
+</script>
+
+</body>
+</html>
