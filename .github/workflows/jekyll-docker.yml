@@ -22,14 +22,14 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Restore Dependencies
-        run: dotnet restore C:\Users\glauder.ferreira\Documents\Programa de Software\Projeto-de-software-Atv-03\Projeto-de-software-Atv-03.sln
+        run: dotnet restore Projeto-de-software-Atv-03.sln
 
       - name: Build
-        run: dotnet build C:\Users\glauder.ferreira\Documents\Programa de Software\Projeto-de-software-Atv-03\Projeto-de-software-Atv-03.sln --configuration Release --no-restore
+        run: dotnet build Projeto-de-software-Atv-03.sln --configuration Release --no-restore
 
       - name: Test
         run: |
-          dotnet test C:\Users\glauder.ferreira\Documents\Programa de Software\Projeto-de-software-Atv-03\Projeto-de-software-Atv-03.sln \
+          dotnet test Projeto-de-software-Atv-03.sln \
             --configuration Release \
             --no-build \
             --collect:"XPlat Code Coverage"
