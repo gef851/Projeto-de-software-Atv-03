@@ -1,0 +1,29 @@
+name: Code Coverage
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar ambiente e rodar testes
+        run: |
+          # Exemplo genérico: instale dependências e rode testes gerando coverage.xml
+          # npm test -- --coverage (ou pytest --cov=./ --cov-report=xml)
+          echo "Substitua pelo comando do seu projeto"
+
+      - name: Processar relatório de cobertura
+        uses: 5monkeys/cobertura-action@master
+        with:
+          path: coverage.xml
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          minimum_coverage: 75
+          fail_below_threshold: true
+          
