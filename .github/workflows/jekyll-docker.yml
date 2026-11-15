@@ -1,47 +1,49 @@
-name: Jekyll site CI
-
+name: . Jekyll site CI
 on:
   push:
     branches:
-      - "main"
-
+      - main
   pull_request:
     branches:
-      - "main"
-
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    steps: 
-      - name: checkout
+    steps:
+      - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.x
-        
-      - name: Build the site in the jekyll/builder container
-         run: |
-         
-    dotnet test src/Example.sln \
-      --configuration Release \
-      --collect:"XPlat Code Coverage"
-
+      - name: Restore
+        run: dotnet restore src/Example.sln
+      - name: Build
+        run: dotnet build src/Example.sln --configuration Release --no-restore
+      - name: Test
+        run: |
+          dotnet test src/Example.sln \
+            --configuration Release \
+            --no-build \
+            --collect:"XPlat Code Coverage"
       - name: Debug Coverage Files
-         run: find . -name "coverage.cobertura.xml"
-
+        run: find . -name "coverage.cobertura.xml"
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
-    with:
-    filename: "**/coverage.cobertura.xml"
-    badge: true
-    fail_below_min: true
-    format: markdown
-    output: both
-    thresholds: '60 80'
-    
+        with:
+          filename: "**/coverage.cobertura.xml"
+          badge: true
+          fail_below_min: true
+          format: markdown
+          output: both
+          thresholds: '60 80'
       - name: Add Coverage PR Comment
         uses: marocchino/sticky-pull-request-comment@v2
         if: github.event_name == 'pull_request'
         with:
           recreate: true
           path: code-coverage-results.md
+
+
+
+
