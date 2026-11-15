@@ -21,6 +21,7 @@ jobs:
         
       - name: Build the site in the jekyll/builder container
          run: |
+         
     dotnet test src/Example.sln \
       --configuration Release \
       --collect:"XPlat Code Coverage"
