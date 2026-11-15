@@ -16,16 +16,17 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.x
-      - name: Restore
-        run: dotnet restore src/Example.sln
+      - name: Restore Dependencies
+        run: dotnet restore Projeto-de-software-Atv-03.sln
       - name: Build
-        run: dotnet build src/Example.sln --configuration Release --no-restore
+        run: dotnet build Projeto-de-software-Atv-03.sln --configuration Release --no-restore
       - name: Test
         run: |
-          dotnet test src/Example.sln \
-            --configuration Release \
-            --no-build \
-            --collect:"XPlat Code Coverage"
+    dotnet test Projeto-de-software-Atv-03.sln \
+      --configuration Release \
+      --no-build \
+      --collect:"XPlat Code Coverage"
+
       - name: Debug Coverage Files
         run: find . -name "coverage.cobertura.xml"
       - name: Code Coverage Report
