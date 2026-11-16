@@ -24,9 +24,8 @@ jobs:
 
       - name: Build
         run: |
-    SLN=$(find . -type f -name "*.sln" | head -n 1)
-    dotnet build "$SLN" --configuration Release --no-restore
-      - name: Test
+          SLN=$(find . -type f -name "*.sln" | head -n 1)
+
         run: |
           dotnet test src\Projeto-de-software-Atv-03\Projeto-de-software-Atv-03\Projeto-de-software-Atv-03.sln \
             --configuration Release \
