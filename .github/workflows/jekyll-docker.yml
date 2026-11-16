@@ -22,10 +22,10 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Restore
-        run: dotnet restore src/Projeto-de-software-Atv-03\Projeto-de-software-Atv-03.sln
+        run: dotnet restore src/Projeto-de-software-Atv-03.sln
 
       - name: Test with Coverage
-        run: dotnet test /src/Projeto-de-software-Atv-03\Projeto-de-software-Atv-03.sln \
+        run: dotnet test /src/Projeto-de-software-Atv-03.sln \
             --configuration Release \
             --no-build \
             --collect:"XPlat Code Coverage"
