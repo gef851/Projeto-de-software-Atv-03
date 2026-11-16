@@ -1,5 +1,4 @@
-name: Jekyll Docker CI
-
+name: .Jekyll site CI
 on:
     push: 
      branches:
