@@ -20,11 +20,12 @@ jobs:
           dotnet-version: 6.0.x
           
       - name: Restore
-  run: dotnet restore "./caminho/encontrado/Projeto-de-software-Atv-03.sln"
+  run: dotnet restore " .src/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.sln"
 
       - name: Build
-        run: dotnet build "./scr/Projeto-de-software-Atv-03\Projeto-de-software-Atv-03.sln" --configuration Release --no-restore
-
+        run: |
+    SLN=$(find . -type f -name "*.sln" | head -n 1)
+    dotnet build "$SLN" --configuration Release --no-restore
       - name: Test
         run: |
           dotnet test src\Projeto-de-software-Atv-03\Projeto-de-software-Atv-03\Projeto-de-software-Atv-03.sln \
