@@ -25,11 +25,11 @@ jobs:
         run: dotnet restore src/Projeto-de-software-Atv-03.sln
 
       - name: Build
-        run: dotnet build src/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.sln --configuration Release --no-restore
+        run: dotnet build src/Projeto-de-software-Atv-03.sln --configuration Release --no-restore
 
       - name: Test with Coverage
         run: |
-          dotnet test src/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.sln \
+          dotnet test src/Projeto-de-software-Atv-03.sln \
             --configuration Release \
             --no-build \
             --collect:"XPlat Code Coverage"
