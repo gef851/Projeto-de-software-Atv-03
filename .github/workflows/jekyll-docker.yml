@@ -1,4 +1,4 @@
-name: .Net 6 CI Build
+name: Jekyll Docker CI
 
 on:
     push: 
