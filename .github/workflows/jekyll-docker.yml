@@ -28,8 +28,7 @@ jobs:
         run: dotnet build src/Projeto-de-software-Atv-03.sln --configuration Release --no-restore
 
       - name: Test with Coverage
-        run: |
-          dotnet test src/Projeto-de-software-Atv-03.sln \
+        run: dotnet test src/Projeto-de-software-Atv-03.sln \
             --configuration Release \
             --no-build \
             --collect:"XPlat Code Coverage"
