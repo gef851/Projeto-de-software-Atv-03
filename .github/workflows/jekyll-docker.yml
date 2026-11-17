@@ -9,7 +9,14 @@ on:
       - main
 
 jobs:
-  build:
+
+  - name: Listar arquivos
+    run: |
+     pwd
+     find . -name "*.sln"
+     find . -name "*.csproj"
+
+ build:
     runs-on: ubuntu-latest
 
     steps:
