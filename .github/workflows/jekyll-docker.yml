@@ -53,8 +53,14 @@ jobs:
 
       - name: Generate Coverage Report
         run: |
-          COVERAGE_FILES=./Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/coverage.cobertura.xml
+      - name: Debug Coverage Files
+        shell: bash
+        run: |
+         echo "Workspace:"
+         pwd
 
+         echo "Arquivos de cobertura encontrados:"
+         find . -type f -name "coverage.cobertura.xml"
           reportgenerator \
             "-reports:$COVERAGE_FILES" \
             "-targetdir:CoverageReport" \
