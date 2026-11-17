@@ -19,16 +19,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.x
-      - name: Debug
-        run: |
-         pwd
-         find . -name "*.csproj"
-         find . -name "*.sln"
+          
       - name: Diagnóstico
         run: |
          pwd
-         echo "=== Arquivos de projeto ==="
-         find . \( -name "*.csproj" -o -name "*.sln" \)
+         ls -R
          
       - name: Restore
         run: dotnet restore
