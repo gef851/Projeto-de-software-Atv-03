@@ -26,13 +26,13 @@ jobs:
          ls -R
          
       - name: Restore
-        run: dotnet restore ./Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.csproj
+        run: dotnet restore ./Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.sln
 
       - name: Build
         run: dotnet build ./Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.sln --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test ./Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.csproj --configuration Release --no-build
+        run: dotnet test ./Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.sln --configuration Release --no-build
         
       - name: Debug Coverage Files
         run: |
