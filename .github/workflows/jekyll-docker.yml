@@ -35,30 +35,24 @@ jobs:
         run: |
           echo "Arquivos de cobertura encontrados:"
           find . -name "coverage.cobertura.xml"
-
-      - name: Test with Coverage
-        run: |
-          dotnet test \
-          --configuration Release \
-          --collect:"XPlat Code Coverage" \
-          --results-directory ./TestResults
           
       - name: Install ReportGenerator
-        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+        run: |
+          dotnet tool install --global dotnet-reportgenerator-globaltool
+          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
-      - name: Generate Coverage Report
+      - name: Verify Coverage Files
+        run: |
+         find . -name "coverage.cobertura.xml"
+
+      - name: Generate HTML Coverage Report
         run: |
          reportgenerator \
-         "-reports:**/coverage.cobertura.xml" \
-         "-targetdir:CoverageReport" \
-         "-reporttypes:Html;MarkdownSummary;TextSummary"
+         -reports:"$(find . -name 'coverage.cobertura.xml' | tr '\n' ';')" \
+         -targetdir:"CoverageReport" \
+         -reporttypes:"Html;MarkdownSummary;TextSummary"
 
-         - name: Code Coverage Report
-           run: |
-           cat CoverageReport/Summary.txt
-
-          - name: Upload Coverage Report
-            uses: actions/upload-artifact@v4
-         with:
-         name: coverage-report
-         path: CoverageReport
+      - name: Verify Generated Report
+        run: |
+         ls -la CoverageReport
+         test -f CoverageReport/index.html
