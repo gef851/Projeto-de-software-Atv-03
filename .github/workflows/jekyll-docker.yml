@@ -54,7 +54,7 @@ jobs:
       - name: Generate Coverage Report
         shell: bash
         run: |
-         COVERAGE_FILES=$(find . -name "coverage.cobertura.xml" | paste -sd ';' -)
+         COVERAGE_FILES="./TestResults/a1/coverage.cobertura.xml;./TestResults/b2/coverage.cobertura.xml"
       
             if [ -z "$COVERAGE_FILES" ]; then
             echo "Nenhum arquivo coverage.cobertura.xml encontrado"
