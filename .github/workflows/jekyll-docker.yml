@@ -54,17 +54,30 @@ jobs:
       - name: Generate Coverage Report
         shell: bash
         run: |
-          COVERAGE_FILES=$(find . -name "coverage.cobertura.xml" | paste -sd ';' -)
+         COVERAGE_FILES=$(find . -name "coverage.cobertura.xml" | paste -sd ';' -)
+      
+            if [ -z "$COVERAGE_FILES" ]; then
+            echo "Nenhum arquivo coverage.cobertura.xml encontrado"
+            exit 1
+            fi
 
-          echo "Coverage files encontrados:"
-          echo "$COVERAGE_FILES"
+          reportgenerator \
+          "-reports:$COVERAGE_FILES" \
+          "-targetdir:CoverageReport" \
+          "-reporttypes:Html"
 
-           reportgenerator \
-           "-reports:$COVERAGE_FILES" \
-           "-targetdir:CoverageReport" \
-           "-reporttypes:Html;HtmlSummary;TextSummary;MarkdownSummary"
+         - name: Validate HTML Report
+           run: |
+           echo "Arquivos gerados:"
+           ls -R CoverageReport
 
-      - name: Verify Generated Report
-        run: |
-         ls -la CoverageReport
-         test -f CoverageReport/index.html
+            if [ ! -f CoverageReport/index.html ]; then
+           echo "index.html não foi gerado"
+           exit 1
+           fi
+
+           Para gerar HTML e
+         - name: Verify Generated Report
+           run: |
+           ls -la CoverageReport
+           test -f CoverageReport/index.html
