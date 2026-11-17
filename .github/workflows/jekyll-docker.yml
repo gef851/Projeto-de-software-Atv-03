@@ -75,7 +75,13 @@ jobs:
            echo "index.html não foi gerado"
            exit 1
            fi
-
+           
+         - name: Upload coverage.cobertura.xml
+           uses: actions/upload-artifact@v4
+         with:
+           name: coverage-cobertura-xml
+           path: '**/coverage.cobertura.xml'
+           
            Para gerar HTML e
          - name: Verify Generated Report
            run: |
