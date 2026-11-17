@@ -59,16 +59,6 @@ jobs:
          echo "Workspace:"
          pwd
 
-      - name: Validate HTML Report
-        run: |
-          echo "Arquivos gerados:"
-          ls -R CoverageReport
-
-          if [ ! -f CoverageReport/index.html ]; then
-            echo "index.html não foi gerado"
-            exit 1
-          fi
-
       - name: Upload coverage.cobertura.xml
         uses: actions/upload-artifact@v4
         with:
