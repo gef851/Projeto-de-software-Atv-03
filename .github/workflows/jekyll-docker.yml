@@ -19,7 +19,11 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.x
-
+      - name: Debug
+        run: |
+         pwd
+         find . -name "*.csproj"
+         find . -name "*.sln"
       - name: Restore
         run: dotnet restore Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.csproj
 
