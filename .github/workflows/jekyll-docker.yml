@@ -51,12 +51,18 @@ jobs:
          name: coverage-report
          path: CoverageReport
 
-      - name: Generate HTML Coverage Report
+      - name: Generate Coverage Report
+        shell: bash
         run: |
-         reportgenerator \
-         -reports:"$(find . -name 'coverage.cobertura.xml' | tr '\n' ';')" \
-         -targetdir:"CoverageReport" \
-         -reporttypes:"Html;MarkdownSummary;TextSummary"
+          COVERAGE_FILES=$(find . -name "coverage.cobertura.xml" | paste -sd ';' -)
+
+          echo "Coverage files encontrados:"
+          echo "$COVERAGE_FILES"
+
+           reportgenerator \
+           "-reports:$COVERAGE_FILES" \
+           "-targetdir:CoverageReport" \
+           "-reporttypes:Html;HtmlSummary;TextSummary;MarkdownSummary"
 
       - name: Verify Generated Report
         run: |
