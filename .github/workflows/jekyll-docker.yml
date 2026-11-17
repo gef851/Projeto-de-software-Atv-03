@@ -53,12 +53,7 @@ jobs:
 
       - name: Generate Coverage Report
         run: |
-          COVERAGE_FILES=$(find . -type f -name "coverage.cobertura.xml" | paste -sd ';' -)
-
-          if [ -z "$COVERAGE_FILES" ]; then
-            echo "Nenhum arquivo coverage.cobertura.xml encontrado"
-            exit 1
-          fi
+          COVERAGE_FILES=./Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/coverage/.cobertura.xml
 
           reportgenerator \
             "-reports:$COVERAGE_FILES" \
