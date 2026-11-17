@@ -65,29 +65,24 @@ jobs:
             "-targetdir:CoverageReport" \
             "-reporttypes:Html"
 
-          reportgenerator \
-          "-reports:$COVERAGE_FILES" \
-          "-targetdir:CoverageReport" \
-          "-reporttypes:Html"
+      - name: Validate HTML Report
+        run: |
+          echo "Arquivos gerados:"
+          ls -R CoverageReport
 
-         - name: Validate HTML Report
-           run: |
-           echo "Arquivos gerados:"
-           ls -R CoverageReport
+          if [ ! -f CoverageReport/index.html ]; then
+            echo "index.html não foi gerado"
+            exit 1
+          fi
 
-            if [ ! -f CoverageReport/index.html ]; then
-           echo "index.html não foi gerado"
-           exit 1
-           fi
-           
-         - name: Upload coverage.cobertura.xml
-           uses: actions/upload-artifact@v4
-         with:
-           name: coverage-cobertura-xml
-           path: '**/coverage.cobertura.xml'
-           
-           Para gerar HTML e
-         - name: Verify Generated Report
-           run: |
-           ls -la CoverageReport
-           test -f CoverageReport/index.html
+      - name: Upload coverage.cobertura.xml
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-cobertura-xml
+          path: '**/coverage.cobertura.xml'
+
+      - name: Upload HTML Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-html
+          path: CoverageReport/
