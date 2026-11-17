@@ -53,7 +53,7 @@ jobs:
 
       - name: Generate Coverage Report
         run: |
-          COVERAGE_FILES="././Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/coverage.cobertura.xml"
+          COVERAGE_FILES="./Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/coverage.cobertura.xml"
 
           if [ -z "$COVERAGE_FILES" ]; then
             echo "Nenhum arquivo coverage.cobertura.xml encontrado"
