@@ -24,7 +24,7 @@ jobs:
          pwd
          find . -name "*.csproj"
          find . -name "*.sln"
-         
+         - run: find . -name "*.csproj"
       - name: Restore
         run: dotnet restore ./Projeto-de-software-Atv-03.csproj
 
