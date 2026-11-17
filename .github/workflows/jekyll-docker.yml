@@ -26,16 +26,13 @@ jobs:
          find . -name "*.sln"
          
       - name: Restore
-        run: dotnet restore ./Projeto-de-software-Atv-03.csproj
+        run: dotnet restore
 
       - name: Build
-        run: dotnet build ./Projeto-de-software-Atv-03.csproj --configuration Release --no-restore
-        
-      - name: Test with Coverage
-        run: dotnet test Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.csproj
-            --configuration Release
-            --no-build
-            --collect:"XPlat Code Coverage"
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --configuration Release --no-build --verbosity normal
 
       - name: Debug Coverage Files
         run: |
