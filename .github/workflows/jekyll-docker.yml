@@ -24,8 +24,12 @@ jobs:
          pwd
          find . -name "*.csproj"
          find . -name "*.sln"
+         
       - name: Restore
-        run: dotnet restore Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.csproj
+        run: dotnet restore ./Projeto-de-software-Atv-03.csproj
+
+      - name: Build
+        run: dotnet build ./Projeto-de-software-Atv-03.csproj --configuration Release --no-restore
 
       - name: Test with Coverage
         run: dotnet test Projeto-de-software-Atv-03/Projeto-de-software-Atv-03/Projeto-de-software-Atv-03.csproj
