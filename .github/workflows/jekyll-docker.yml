@@ -24,6 +24,11 @@ jobs:
          pwd
          find . -name "*.csproj"
          find . -name "*.sln"
+      - name: Diagnóstico
+        run: |
+         pwd
+         echo "=== Arquivos de projeto ==="
+         find . \( -name "*.csproj" -o -name "*.sln" \)
          
       - name: Restore
         run: dotnet restore
