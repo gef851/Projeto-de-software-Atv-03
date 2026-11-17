@@ -52,14 +52,18 @@ jobs:
          path: CoverageReport
 
       - name: Generate Coverage Report
-        shell: bash
         run: |
-         COVERAGE_FILES="./TestResults/a1/coverage.cobertura.xml;./TestResults/b2/coverage.cobertura.xml"
-      
-            if [ -z "$COVERAGE_FILES" ]; then
+          COVERAGE_FILES="./TestResults/a1/coverage.cobertura.xml;./TestResults/b2/coverage.cobertura.xml"
+
+          if [ -z "$COVERAGE_FILES" ]; then
             echo "Nenhum arquivo coverage.cobertura.xml encontrado"
             exit 1
-            fi
+          fi
+
+          reportgenerator \
+            "-reports:$COVERAGE_FILES" \
+            "-targetdir:CoverageReport" \
+            "-reporttypes:Html"
 
           reportgenerator \
           "-reports:$COVERAGE_FILES" \
